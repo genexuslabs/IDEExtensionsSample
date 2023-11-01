@@ -1,25 +1,25 @@
 ﻿using System.Windows.Forms;
 
-namespace Artech.Packages.SupportTools.ShortNames
+namespace GeneXus.Packages.SupportTools.ShortNames
 {
     public partial class ShortenNamesDlg : Form
     {
         public bool ShortenAttributeNames
         {
-            get { return chkShortenAttributes.Checked; }
-            set { chkShortenAttributes.Checked = value; }
+            get => chkShortenAttributes.Checked;
+            set => chkShortenAttributes.Checked = value;
         }
 
         public bool ShortenTableNames
         {
-            get { return chkShortenTables.Checked; }
-            set { chkShortenTables.Checked = value; }
+            get => chkShortenTables.Checked;
+            set => chkShortenTables.Checked = value;
         }
 
         public bool ShortenObjectNames
         {
-            get { return chkShortenObjects.Checked; }
-            set { chkShortenObjects.Checked = value; }
+            get => chkShortenObjects.Checked;
+            set => chkShortenObjects.Checked = value;
         }
 
         private int m_nMaxAttriNameLength;
@@ -45,29 +45,19 @@ namespace Artech.Packages.SupportTools.ShortNames
             EnableOrDisableOkButton();
         }
 
-        private bool IsAnyChekboxSet()
+        private bool IsAnyCheckboxSet()
         {
             return ShortenAttributeNames || ShortenTableNames || ShortenObjectNames;
         }
 
-        private void chkShortenAttributes_CheckedChanged(object sender, System.EventArgs e)
-        {
-            EnableOrDisableOkButton();
-        }
-
-        private void chkShortenTables_CheckedChanged(object sender, System.EventArgs e)
-        {
-            EnableOrDisableOkButton();
-        }
-
-        private void chkShortenObjects_CheckedChanged(object sender, System.EventArgs e)
+        private void chk_CheckedChanged(object sender, System.EventArgs e)
         {
             EnableOrDisableOkButton();
         }
 
         private void EnableOrDisableOkButton()
         {
-            btnOK.Enabled = IsAnyChekboxSet();
+            btnOK.Enabled = IsAnyCheckboxSet();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Artech.Packages.SupportTools.ShortNames
+﻿namespace GeneXus.Packages.SupportTools.ShortNames
 {
     partial class ShortenNamesDlg
     {
@@ -79,7 +79,7 @@
             this.chkShortenAttributes.TabIndex = 3;
             this.chkShortenAttributes.Text = "Description taken from Resources.ShortenNamesAttributesOption";
             this.chkShortenAttributes.UseVisualStyleBackColor = true;
-            this.chkShortenAttributes.CheckedChanged += new System.EventHandler(this.chkShortenAttributes_CheckedChanged);
+            this.chkShortenAttributes.CheckedChanged += new System.EventHandler(this.chk_CheckedChanged);
             // 
             // chkShortenTables
             // 
@@ -91,7 +91,7 @@
             this.chkShortenTables.TabIndex = 3;
             this.chkShortenTables.Text = "Description taken from Resources.ShortenNamesTablesOption";
             this.chkShortenTables.UseVisualStyleBackColor = true;
-            this.chkShortenTables.CheckedChanged += new System.EventHandler(this.chkShortenTables_CheckedChanged);
+            this.chkShortenTables.CheckedChanged += new System.EventHandler(this.chk_CheckedChanged);
             // 
             // chkShortenObjects
             // 
@@ -103,7 +103,7 @@
             this.chkShortenObjects.TabIndex = 3;
             this.chkShortenObjects.Text = "Description taken from Resources.ShortenNamesObjectsOption";
             this.chkShortenObjects.UseVisualStyleBackColor = true;
-            this.chkShortenObjects.CheckedChanged += new System.EventHandler(this.chkShortenObjects_CheckedChanged);
+            this.chkShortenObjects.CheckedChanged += new System.EventHandler(this.chk_CheckedChanged);
             // 
             // ShortenNamesDlg
             // 

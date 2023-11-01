@@ -7,16 +7,16 @@ using Artech.Genexus.Common.Objects;
 using Artech.Genexus.Common.Parts;
 using gx = Artech.Genexus.Common.Objects;
 
-namespace Artech.Packages.SupportTools.ShortNames
+namespace GeneXus.Packages.SupportTools.ShortNames
 {
-	public class ShortenNames
-	{
-		private static string ShorteningSection = "ShortenNames";
+    public class ShortenNames
+    {
+        private const string ShorteningSection = "ShortenNames";
 
-		public static bool Execute(KBModel model)
-		{
-			if (model == null)
-				return false;
+        public static bool Execute(KBModel model)
+        {
+            if (model == null)
+                return false;
 
             int maxAttNameLength = model.GetPropertyValue<int>(Properties.MODEL.SignificantAttributeNameLength);
             int maxTblNameLength = model.GetPropertyValue<int>(Properties.MODEL.SignificantTableNameLength);
@@ -26,15 +26,15 @@ namespace Artech.Packages.SupportTools.ShortNames
             if (dlg.ShowDialog() != DialogResult.OK)
                 return false;
 
-			IOutputService output = CommonServices.Output;
-			output.Show("General");
-			output.StartSection(ShorteningSection, Resources.ShortenNamesSection);
-			bool success = false;
+            IOutputService output = CommonServices.Output;
+            output.Show(output.GetDefaultOutputId());
+            output.StartSection(ShorteningSection, Resources.ShortenNamesSection);
+            bool success = false;
 
-			try
-			{
-				using (KnowledgeBase.Transaction transaction = model.KB.BeginTransaction())
-				{
+            try
+            {
+                using (KnowledgeBase.Transaction transaction = model.KB.BeginTransaction())
+                {
                     if (dlg.ShortenAttributeNames)
                         ShortenAttributeNames(model, maxAttNameLength, output);
 
@@ -44,28 +44,28 @@ namespace Artech.Packages.SupportTools.ShortNames
                     if (dlg.ShortenObjectNames)
                         ShortenObjectNames(model, maxObjNameLength, output);
 
-					transaction.Commit();
-					success = true;
-				}
-			}
-			catch (System.Exception exception)
-			{
-				output.AddLine(exception.Message);
-			}
-			finally
-			{
-				output.EndSection(Resources.ShortenNamesSection, success);
-			}
+                    transaction.Commit();
+                    success = true;
+                }
+            }
+            catch (System.Exception exception)
+            {
+                output.AddErrorLine(exception);
+            }
+            finally
+            {
+                output.EndSection(ShorteningSection, Resources.ShortenNamesSection, success);
+            }
 
-			return success;
-		}
-
-        private static void ShortenAttributeNames(KBModel model, int maxAttNameLength, IOutputService output)
-        {
-            ShortenKBObjectNames("Attributes", Utilities.Cast<Attribute, KBObject>(Attribute.GetAll(model)), maxAttNameLength, output);
+            return success;
         }
 
-        private static void ShortenKBObjectNames(string categoryName, IEnumerable<KBObject> objects, int maxNameLength, IOutputService output)
+        private static void ShortenAttributeNames(KBModel model, int maxAttNameLength, IOutputTarget output)
+        {
+            ShortenKBObjectNames("Attributes", Attribute.GetAll(model), maxAttNameLength, output);
+        }
+
+        private static void ShortenKBObjectNames(string categoryName, IEnumerable<KBObject> objects, int maxNameLength, IOutputTarget output)
         {
             output.AddLine(string.Format(Resources.RenamingObjects, categoryName, maxNameLength));
 
@@ -90,7 +90,7 @@ namespace Artech.Packages.SupportTools.ShortNames
             output.AddLine(string.Format(Resources.RenamedObjects, objsRenamed, objsTotal, categoryName));
         }
 
-        private static void ShortenTableNames(KBModel model, int maxTblNameLength, IOutputService output)
+        private static void ShortenTableNames(KBModel model, int maxTblNameLength, IOutputTarget output)
         {
             output.AddLine(string.Format(Resources.RenamingObjects, "Tables and Indexes", maxTblNameLength));
 
@@ -136,22 +136,22 @@ namespace Artech.Packages.SupportTools.ShortNames
             output.AddLine(string.Format(Resources.RenamedObjects, idxsRenamed, idxsTotal, "Indexes"));
         }
 
-        private static void ShortenObjectNames(KBModel model, int maxObjNameLength, IOutputService output)
+        private static void ShortenObjectNames(KBModel model, int maxObjNameLength, IOutputTarget output)
         {
-            ShortenKBObjectNames("Menus", Utilities.Cast<gx.Menu, KBObject>(gx.Menu.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("Menu Bars", Utilities.Cast<gx.Menubar, KBObject>(gx.Menubar.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("Procedures", Utilities.Cast<Procedure, KBObject>(Procedure.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("SDTs", Utilities.Cast<SDT, KBObject>(SDT.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("Transactions", Utilities.Cast<Transaction, KBObject>(Transaction.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("Work Panels", Utilities.Cast<WorkPanel, KBObject>(WorkPanel.GetAll(model)), maxObjNameLength, output);
-            ShortenKBObjectNames("Web Panels", Utilities.Cast<WebPanel, KBObject>(WebPanel.GetAll(model)), maxObjNameLength, output);
+            ShortenKBObjectNames("Menus", gx.Menu.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("Menu Bars", Menubar.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("Procedures", Procedure.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("SDTs", SDT.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("Transactions", Transaction.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("Work Panels", WorkPanel.GetAll(model), maxObjNameLength, output);
+            ShortenKBObjectNames("Web Panels", WebPanel.GetAll(model), maxObjNameLength, output);
         }
 
         private static bool ShortenObjectNameIfNeeded(KBObject obj, int maxLength)
         {
             if (obj.Name.Length > maxLength)
             {
-                obj.Name = obj.Name.Substring(0, maxLength);
+                obj.Name = obj.Name.Remove(maxLength);
                 return true;
             }
 

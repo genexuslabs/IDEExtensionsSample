@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Artech.Packages.SupportTools</RootNamespace>
-    <AssemblyName>Artech.Packages.SupportTools</AssemblyName>
+    <TargetFramework>net471</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,11 +52,16 @@
   <ItemGroup>
     <EmbeddedResource Update="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Catalog.xml" />
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
