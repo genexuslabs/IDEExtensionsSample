@@ -74,6 +74,9 @@ namespace GeneXus.Packages.SupportTools.ShortNames
 
             foreach (KBObject obj in objects)
             {
+                if (obj.IsInterface)
+                    continue;
+
                 objsTotal++;
                 output.AddText(string.Format(Resources.ProcessingObject, obj.TypeDescriptor.Description, obj.Name));
 
