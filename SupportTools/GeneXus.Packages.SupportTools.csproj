@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Artech.Packages.SupportTools</RootNamespace>
+    <AssemblyName>Artech.Packages.SupportTools</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Artech.Architecture.Common">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Architecture.UI.Framework">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.UI.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Common">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Common.Framework">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Common.Helpers">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Helpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Common.Properties">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Properties.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Genexus.Common">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Genexus.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Artech.Udm.Framework">
+      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Udm.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(GX_SDK_DIR)\Src\CommonPackageInfo.cs" Link="Properties\CommonPackageInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SupportTools.package" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Catalog.xml" />
+  </ItemGroup>
+
+</Project>
