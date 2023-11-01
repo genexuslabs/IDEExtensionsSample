@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
+using Artech.Architecture.UI.Framework.Services;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
 using Artech.Genexus.Common.Parts;
@@ -23,7 +24,7 @@ namespace GeneXus.Packages.SupportTools.ShortNames
             int maxObjNameLength = model.GetPropertyValue<int>(Properties.MODEL.SignificantObjectNameLength);
 
             using ShortenNamesDlg dlg = new ShortenNamesDlg(maxAttNameLength, maxTblNameLength, maxObjNameLength);
-            if (dlg.ShowDialog() != DialogResult.OK)
+            if (dlg.ShowDialog(UIServices.Environment.MainWindow) != DialogResult.OK)
                 return false;
 
             IOutputService output = CommonServices.Output;
