@@ -22,7 +22,7 @@ namespace GeneXus.Packages.SupportTools.ShortNames
             int maxTblNameLength = model.GetPropertyValue<int>(Properties.MODEL.SignificantTableNameLength);
             int maxObjNameLength = model.GetPropertyValue<int>(Properties.MODEL.SignificantObjectNameLength);
 
-            ShortenNamesDlg dlg = new ShortenNamesDlg(maxAttNameLength, maxTblNameLength, maxObjNameLength);
+            using ShortenNamesDlg dlg = new ShortenNamesDlg(maxAttNameLength, maxTblNameLength, maxObjNameLength);
             if (dlg.ShowDialog() != DialogResult.OK)
                 return false;
 
