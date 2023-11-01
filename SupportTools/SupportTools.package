@@ -1,34 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Package xmlns="http://schemas.genexus.com/addin/v1.0" id="616AD12C-C14D-4c5d-9A80-CE96B5AD6D23" name="Menu">
+<Package xmlns="http://schemas.genexus.com/addin/v1.0" id="616AD12C-C14D-4c5d-9A80-CE96B5AD6D23" name="SupportTools">
 
-	<!--
-	Resources may contain images and strings.
-	Commands are translated using strings in the resources when
-	there is a resource string with the same name as a command id
-	-->
-	<Resources>
-		<Resource type="strings" name="Artech.Packages.SupportTools.Resources"/>
-		<Resource type="images" name="Artech.Packages.SupportTools.Resources"/>
-	</Resources>
+  <!--
+  Resources may contain images and strings.
+  Commands are translated using strings in the resources when
+  there is a resource string with the same name as a command id
+  -->
+  <Resources>
+    <Resource type="strings" name="GeneXus.Packages.SupportTools.Resources"/>
+    <Resource type="images" name="GeneXus.Packages.SupportTools.Resources"/>
+  </Resources>
 
-	<!-- These are locally defined commands -->
-	<Commands>
-		<CommandDefinition id ="ShortenNames" />
-	</Commands>
+  <!-- These are locally defined commands -->
+  <Commands>
+    <CommandDefinition id ="ShortenNames" />
+  </Commands>
 
-	<!-- You can group commands and then reference them by the group id-->
-	<Groups>
-		<Group id ="SupportTools" >
-			<Command refid="ShortenNames" />
-		</Group>
-	</Groups>
+  <!-- You can group commands and then reference them by the group id-->
+  <Groups>
+    <!-- This group refers to the Advanced group in the Tools menu -->
+    <Group refid='AdvancedGroup' package='98121D96-A7D8-468b-9310-B1F468F812AE'>
+      <Command refid="ShortenNames" />
+    </Group>
+  </Groups>
 
-	<Menus>
-		<Menu type="menubar">
-			<Popup name="Support" insertBefore="Help" >
-				<Group refid="SupportTools" />
-			</Popup>
-		</Menu>
-		
-	</Menus>
 </Package>
