@@ -14,6 +14,7 @@
   <!-- These are locally defined commands -->
   <Commands>
     <CommandDefinition id ="ShortenNames" />
+    <CommandDefinition id ="FixProcs" shortcut="Ctrl9" />
   </Commands>
 
   <!-- You can group commands and then reference them by the group id-->
@@ -21,6 +22,7 @@
     <!-- This group refers to the Advanced group in the Tools menu -->
     <Group refid='AdvancedGroup' package='98121D96-A7D8-468b-9310-B1F468F812AE'>
       <Command refid="ShortenNames" />
+      <Command refid="FixProcs" />
     </Group>
   </Groups>
 

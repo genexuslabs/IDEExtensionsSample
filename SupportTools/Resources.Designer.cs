@@ -61,6 +61,35 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Fix Procs.
+        /// </summary>
+        internal static string FixProcs {
+            get {
+                return ResourceManager.GetString("FixProcs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Converted Procs.
+        /// </summary>
+        internal static string FixProcsSections {
+            get {
+                return ResourceManager.GetString("FixProcsSections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to fix Procedures and Reports that were converted from GeneXus Version 9.0
+        ///
+        ///Please type below the names of objects to fix (separated by commas, spaces or lines)..
+        /// </summary>
+        internal static string FixProcsToolDescription {
+            get {
+                return ResourceManager.GetString("FixProcsToolDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to no need to rename.
         /// </summary>
         internal static string NotRenamed {
