@@ -15,6 +15,7 @@ namespace GeneXus.Packages.SupportTools.FixingProcs
 		public FixProcsDlg()
 		{
 			InitializeComponent();
+			toolDescription.Text = Resources.FixProcsToolDescription;
 		}
 	}
 }
