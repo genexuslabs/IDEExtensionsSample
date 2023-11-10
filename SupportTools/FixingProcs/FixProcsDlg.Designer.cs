@@ -32,6 +32,7 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.toolDescription = new System.Windows.Forms.Label();
+			this.editObjects = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// btnCancel
@@ -53,10 +54,16 @@
 			resources.ApplyResources(this.toolDescription, "toolDescription");
 			this.toolDescription.Name = "toolDescription";
 			// 
+			// editObjects
+			// 
+			resources.ApplyResources(this.editObjects, "editObjects");
+			this.editObjects.Name = "editObjects";
+			// 
 			// FixProcsDlg
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.editObjects);
 			this.Controls.Add(this.toolDescription);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.btnCancel);
@@ -65,6 +72,7 @@
 			this.Name = "FixProcsDlg";
 			this.ShowIcon = false;
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -72,5 +80,6 @@
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Label toolDescription;
+		private System.Windows.Forms.TextBox editObjects;
 	}
 }

@@ -1,6 +1,7 @@
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
 using Artech.Architecture.UI.Framework.Services;
+using Artech.Genexus.Common.Objects;
 using System.Windows.Forms;
 
 namespace GeneXus.Packages.SupportTools.FixingProcs
@@ -27,6 +28,11 @@ namespace GeneXus.Packages.SupportTools.FixingProcs
 			{
 				using (KnowledgeBase.Transaction transaction = model.KB.BeginTransaction())
 				{
+					foreach (string name in dlg.ObjectNames)
+					{
+						ProcessObjectName(model, name);
+					}
+
 					success = true;
 				}
 			}
@@ -40,6 +46,20 @@ namespace GeneXus.Packages.SupportTools.FixingProcs
 			}
 
 			return success;
+		}
+
+		private static void ProcessObjectName(KBModel model, string name)
+		{
+			IOutputService output = CommonServices.Output;
+			Procedure proc = Procedure.Get(model, new QualifiedName(name));
+			if (proc == null)
+			{
+				output.AddWarningLine($"Could not find Procedure '{name}'");
+				return;
+			}
+
+			output.AddLine($"Processing {name}");
+
 		}
 	}
 }

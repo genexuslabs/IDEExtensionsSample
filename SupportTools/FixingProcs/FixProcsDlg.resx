@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="toolDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -184,7 +184,7 @@
     <value>12, 9</value>
   </data>
   <data name="toolDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>577, 124</value>
+    <value>577, 76</value>
   </data>
   <data name="toolDescription.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -202,6 +202,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolDescription.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="editObjects.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="editObjects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 97</value>
+  </data>
+  <data name="editObjects.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="editObjects.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="editObjects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>574, 122</value>
+  </data>
+  <data name="editObjects.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;editObjects.Name" xml:space="preserve">
+    <value>editObjects</value>
+  </data>
+  <data name="&gt;&gt;editObjects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editObjects.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;editObjects.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
