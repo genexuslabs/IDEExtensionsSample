@@ -43,7 +43,6 @@ namespace GeneXus.Packages.SupportTools.FixingProcs
 
 				return objectNames;
 			}
-
 		}
 	}
 }

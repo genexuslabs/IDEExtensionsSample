@@ -11,6 +11,9 @@
       <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Artech.Architecture.Language">
+      <HintPath>..\..\..\GX\ACMU5\SDK\Bin\Artech.Architecture.Language.dll</HintPath>
+    </Reference>
     <Reference Include="Artech.Architecture.UI.Framework">
       <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.UI.Framework.dll</HintPath>
       <Private>False</Private>

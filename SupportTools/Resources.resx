@@ -163,6 +163,6 @@ Please select below for which categories of objects you want to shorten names.</
   <data name="FixProcsToolDescription" xml:space="preserve">
     <value>This tool allows you to fix Procedures and Reports that were converted from GeneXus Version 9.0
 
-Please type below the names of objects to fix (separated by commas, spaces or lines).</value>
+Please type below the names of objects to fix (separated by commas, spaces or lines):</value>
   </data>
 </root>
