@@ -1,6 +1,7 @@
 ﻿using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
 using Artech.Genexus.Common;
+using Artech.Genexus.Common.Objects;
 using Artech.Genexus.Common.Parts.Layout;
 using System;
 using System.Linq;
@@ -26,29 +27,42 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			IOutputService output = CommonServices.Output;
 			output.AddLine($"Processing {name}");
 
-			var att = Attribute.Get(model,name);
-			if (att == null)
+			string typeName = $"Attribute '{name}'";
+			KBObject attOrDom = null;
+			if (name.StartsWith("_"))
 			{
-				output.AddWarningLine($"Could not find Attribute '{name}'");
+				name = name.Substring(1);
+				typeName = $"Domain '{name}'";
+				attOrDom = Domain.Get(model, new QualifiedName(name));
+			}
+			else
+			{
+				typeName = $"Attribute '{name}'";
+				attOrDom = Attribute.Get(model, name);
+			}
+
+			if (attOrDom == null)
+			{
+				output.AddWarningLine($"Could not find {typeName}");
 				return;
 			}
 
-			var dateFormat = att.GetProperty(Properties.ATT.DateFormat);
-			if (dateFormat == null) { }
+			var dateFormat = attOrDom.GetPropertyValue<string>(Properties.ATT.DateFormat);
+			if (string.IsNullOrEmpty(dateFormat))
 			{
-				output.AddWarningLine($"Could not gate DateFormat for Attribute '{name}'");
+				output.AddWarningLine($"Could not gate DateFormat for {typeName}");
 				return;
 			}
 
-			if ((string)dateFormat.Value == Properties.ATT.DateFormat_Values.YearWithFourDigits99999999)
+			if (dateFormat == Properties.ATT.DateFormat_Values.YearWithFourDigits99999999)
 			{
-				output.AddWarningLine($"Attribute '{name}' does not need to be fixed");
+				output.AddWarningLine($"{typeName} does not need to be fixed");
 				return;
 			}
 
-			att.SetPropertyValue(Properties.ATT.DateFormat, Properties.ATT.DateFormat_Values.YearWithFourDigits99999999);
-			att.Save();
-			output.AddLine($"Attribue '{name}' was adjusted");
+			attOrDom.SetPropertyValue(Properties.ATT.DateFormat, Properties.ATT.DateFormat_Values.YearWithFourDigits99999999);
+			attOrDom.Save();
+			output.AddLine($"{typeName} was adjusted");
 		}
 	}
 }
