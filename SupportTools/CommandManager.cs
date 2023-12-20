@@ -13,7 +13,7 @@ namespace GeneXus.Packages.SupportTools
 		{
 			AddCommand(CommandKeys.ShortenNames, ExecShortenNames, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixProcs, ExecFixProcs, QueryProcessingCommand);
-			AddCommand(CommandKeys.FixDateAttributes, ExecFixProcs, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixDateAttributes, ExecFixDateAttributes, QueryProcessingCommand);
 		}
 
 		private bool QueryProcessingCommand(CommandData commandData, ref CommandStatus status)

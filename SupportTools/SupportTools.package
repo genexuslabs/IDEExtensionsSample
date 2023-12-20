@@ -14,6 +14,7 @@
   <!-- These are locally defined commands -->
   <Commands>
     <CommandDefinition id ="ShortenNames" />
+    <CommandDefinition id ="FixDateAttributes" shortcut="Ctrl8" />
     <CommandDefinition id ="FixProcs" shortcut="Ctrl9" />
   </Commands>
 
