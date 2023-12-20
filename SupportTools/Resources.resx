@@ -165,6 +165,14 @@ Please select below for which categories of objects you want to shorten names.</
 
 Please type below the names of objects to fix (separated by commas, spaces or lines):</value>
   </data>
+  <data name="FixDateAtributesDescription" xml:space="preserve">
+    <value>This tool allows you to fix Date Attributes to make sure they use the long date format.
+
+Please type below the names of attributes to fix (separated by commas, spaces or lines):</value>
+  </data>
+  <data name="FixDateAttributesTitle" xml:space="preserve">
+    <value>Fix Date Attributes</value>
+  </data>
   <data name="FixProcsTitle" xml:space="preserve">
     <value>Fix Converted Procs</value>
   </data>

@@ -11,27 +11,12 @@ namespace GeneXus.Packages.SupportTools
 	{
 		public CommandManager()
 		{
-			AddCommand(CommandKeys.ShortenNames, ExecShortenNames, QueryShortenNames);
-			AddCommand(CommandKeys.FixProcs, ExecFixProcs, QueryFixProcs);
+			AddCommand(CommandKeys.ShortenNames, ExecShortenNames, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixProcs, ExecFixProcs, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixDateAttributes, ExecFixProcs, QueryProcessingCommand);
 		}
 
-		public bool ExecShortenNames(CommandData commandData)
-		{
-			ShortenNames.Execute(UIServices.KB.CurrentModel);
-			return true;
-		}
-
-		private bool QueryShortenNames(CommandData commandData, ref CommandStatus status) => QueryProcessingCommand(status);
-
-		public bool ExecFixProcs(CommandData commandData)
-		{
-			FixProcs.ExecuteTool(UIServices.KB.CurrentModel);
-			return true;
-		}
-
-		private bool QueryFixProcs(CommandData commandData, ref CommandStatus status) => QueryProcessingCommand(status);
-
-		private static bool QueryProcessingCommand(CommandStatus status)
+		private bool QueryProcessingCommand(CommandData commandData, ref CommandStatus status)
 		{
 			IKBService kbserv = UIServices.KB;
 
@@ -44,5 +29,24 @@ namespace GeneXus.Packages.SupportTools
 
 			return true;
 		}
+
+		public bool ExecShortenNames(CommandData commandData)
+		{
+			ShortenNames.Execute(UIServices.KB.CurrentModel);
+			return true;
+		}
+
+		public bool ExecFixProcs(CommandData commandData)
+		{
+			FixProcs.ExecuteTool(UIServices.KB.CurrentModel);
+			return true;
+		}
+
+		public bool ExecFixDateAttributes(CommandData commandData)
+		{
+			FixDateAttributes.ExecuteTool(UIServices.KB.CurrentModel);
+			return true;
+		}
+
 	}
 }

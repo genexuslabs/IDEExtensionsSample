@@ -1,12 +1,10 @@
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
-using Artech.Architecture.UI.Framework.Services;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
 using Artech.Genexus.Common.Parts.Layout;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
@@ -18,7 +16,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 		public static bool ExecuteTool(KBModel model)
 		{
-			FixProcs instance = new FixProcs();
+			var instance = new FixProcs();
 			return instance.Execute(model);
 		}
 

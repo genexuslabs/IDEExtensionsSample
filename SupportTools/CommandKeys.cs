@@ -6,5 +6,6 @@ namespace GeneXus.Packages.SupportTools
 	{
 		public static CommandKey ShortenNames => new CommandKey(Package.Guid, "ShortenNames");
 		public static CommandKey FixProcs => new CommandKey(Package.Guid, "FixProcs");
+		public static CommandKey FixDateAttributes => new CommandKey(Package.Guid, "FixDateAttributes");
 	}
 }

@@ -61,6 +61,26 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to fix Date Attributes to make sure they use the long date format.
+        ///
+        ///Please type below the names of attributes to fix (separated by commas, spaces or lines):.
+        /// </summary>
+        internal static string FixDateAtributesDescription {
+            get {
+                return ResourceManager.GetString("FixDateAtributesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Date Attributes.
+        /// </summary>
+        internal static string FixDateAttributesTitle {
+            get {
+                return ResourceManager.GetString("FixDateAttributesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Fix Procs.
         /// </summary>
         internal static string FixProcs {
