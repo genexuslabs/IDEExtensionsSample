@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GeneXus.Packages.SupportTools.FixingProcs
+namespace GeneXus.Packages.SupportTools.Fixing
 {
-	public partial class FixProcsDlg : Form
+	public partial class FixObjetsDlg : Form
 	{
 
 		private string ObjectsSpecification
@@ -20,10 +20,11 @@ namespace GeneXus.Packages.SupportTools.FixingProcs
 		}
 
 
-		public FixProcsDlg()
+		public FixObjetsDlg(string title, string description)
 		{
 			InitializeComponent();
-			toolDescription.Text = Resources.FixProcsToolDescription;
+			Text = title;
+			toolDescription.Text = description;
 		}
 
 		private int lastConvertedHash = 0;

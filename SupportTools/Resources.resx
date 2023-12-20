@@ -165,4 +165,7 @@ Please select below for which categories of objects you want to shorten names.</
 
 Please type below the names of objects to fix (separated by commas, spaces or lines):</value>
   </data>
+  <data name="FixProcsTitle" xml:space="preserve">
+    <value>Fix Converted Procs</value>
+  </data>
 </root>

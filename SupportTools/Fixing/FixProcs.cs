@@ -8,52 +8,21 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace GeneXus.Packages.SupportTools.FixingProcs
+namespace GeneXus.Packages.SupportTools.Fixing
 {
-	public class FixProcs
+	public class FixProcs : FixObjects
 	{
-		private const string ProcsFixingSection = "FixProcs";
+		public FixProcs()
+			: base (Resources.FixProcsTitle, Resources.FixProcsToolDescription)
+		{}
 
-		public static bool Execute(KBModel model)
+		public static bool ExecuteTool(KBModel model)
 		{
-			if (model == null)
-				return false;
-
-			using FixProcsDlg dlg = new FixProcsDlg();
-			if (dlg.ShowDialog(UIServices.Environment.MainWindow) != DialogResult.OK)
-				return false;
-
-			IOutputService output = CommonServices.Output;
-			output.Show(output.GetDefaultOutputId());
-			output.StartSection(ProcsFixingSection, Resources.FixProcsSections);
-			bool success = false;
-
-			try
-			{
-				using (KnowledgeBase.Transaction transaction = model.KB.BeginTransaction())
-				{
-					foreach (string name in dlg.ObjectNames)
-					{
-						ProcessObjectName(model, name);
-					}
-
-					transaction.Commit();
-					success = true;
-				}
-			}
-			catch (System.Exception exception)
-			{
-				output.AddErrorLine(exception);
-			}
-			finally
-			{
-				output.EndSection(ProcsFixingSection, Resources.FixProcsSections, success);
-			}
-
-			return success;
+			FixProcs instance = new FixProcs();
+			return instance.Execute(model);
 		}
 
-		private static void ProcessObjectName(KBModel model, string name)
+		protected override void ProcessObjectName(KBModel model, string name)
 		{
 			IOutputService output = CommonServices.Output;
 			output.AddLine($"Processing {name}");

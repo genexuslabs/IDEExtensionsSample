@@ -3,7 +3,7 @@ using Artech.Architecture.UI.Framework.Services;
 using Artech.Common.Framework.Commands;
 using Artech.Genexus.Common.Services;
 using GeneXus.Packages.SupportTools.ShortNames;
-using GeneXus.Packages.SupportTools.FixingProcs;
+using GeneXus.Packages.SupportTools.Fixing;
 
 namespace GeneXus.Packages.SupportTools
 {
@@ -25,7 +25,7 @@ namespace GeneXus.Packages.SupportTools
 
 		public bool ExecFixProcs(CommandData commandData)
 		{
-			FixProcs.Execute(UIServices.KB.CurrentModel);
+			FixProcs.ExecuteTool(UIServices.KB.CurrentModel);
 			return true;
 		}
 
