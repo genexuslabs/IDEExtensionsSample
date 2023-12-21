@@ -1,6 +1,6 @@
 ﻿namespace GeneXus.Packages.SupportTools.Fixing
 {
-	partial class FixObjetsDlg
+	partial class FixObjectsDlg
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FixObjetsDlg));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FixObjectsDlg));
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.toolDescription = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@
 			resources.ApplyResources(this.editObjects, "editObjects");
 			this.editObjects.Name = "editObjects";
 			// 
-			// FixObjetsDlg
+			// FixObjectsDlg
 			// 
 			this.AcceptButton = this.btnOK;
 			resources.ApplyResources(this, "$this");
@@ -71,7 +71,7 @@
 			this.Controls.Add(this.btnCancel);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "FixObjetsDlg";
+			this.Name = "FixObjectsDlg";
 			this.ShowIcon = false;
 			this.ResumeLayout(false);
 			this.PerformLayout();

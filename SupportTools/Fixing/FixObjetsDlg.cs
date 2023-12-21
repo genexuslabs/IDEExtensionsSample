@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
-	public partial class FixObjetsDlg : Form
+	public partial class FixObjectsDlg : Form
 	{
 
 		private string ObjectsSpecification
@@ -14,7 +14,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 		}
 
 
-		public FixObjetsDlg(string title, string description)
+		public FixObjectsDlg(string title, string description)
 		{
 			InitializeComponent();
 			Text = title;

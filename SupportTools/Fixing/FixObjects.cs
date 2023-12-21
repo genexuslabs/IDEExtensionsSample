@@ -21,7 +21,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			if (model == null)
 				return false;
 
-			using FixObjetsDlg dlg = new FixObjetsDlg(Title, Description);
+			using FixObjectsDlg dlg = new FixObjectsDlg(Title, Description);
 			if (dlg.ShowDialog(UIServices.Environment.MainWindow) != DialogResult.OK)
 				return false;
 
