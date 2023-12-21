@@ -65,9 +65,9 @@ namespace GeneXus.Packages.SupportTools {
         ///
         ///Please type below the names of attributes to fix (separated by commas, spaces or lines):.
         /// </summary>
-        internal static string FixDateAtributesDescription {
+        internal static string FixDateAttributesDescription {
             get {
-                return ResourceManager.GetString("FixDateAtributesDescription", resourceCulture);
+                return ResourceManager.GetString("FixDateAttributesDescription", resourceCulture);
             }
         }
         
@@ -77,6 +77,26 @@ namespace GeneXus.Packages.SupportTools {
         internal static string FixDateAttributesTitle {
             get {
                 return ResourceManager.GetString("FixDateAttributesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to fix Date Variables in objects to make sure they use the long date format.
+        ///
+        ///Please type below the pairs of {object, variable} names of variables to fix (separated by commas, spaces or lines):.
+        /// </summary>
+        internal static string FixDateVariablesDescription {
+            get {
+                return ResourceManager.GetString("FixDateVariablesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Object Date Variables.
+        /// </summary>
+        internal static string FixDateVariablesTitle {
+            get {
+                return ResourceManager.GetString("FixDateVariablesTitle", resourceCulture);
             }
         }
         

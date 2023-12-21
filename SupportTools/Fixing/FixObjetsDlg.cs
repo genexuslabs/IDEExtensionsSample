@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GeneXus.Packages.SupportTools.Fixing
@@ -43,6 +37,28 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				lastConvertedHash = ObjectsSpecification.GetHashCode();
 
 				return objectNames;
+			}
+		}
+
+		public IEnumerable<Tuple<string, string>> ObjectItems
+		{
+			get
+			{
+				var enumerator = ObjectNames.GetEnumerator();
+				while (enumerator.MoveNext())
+				{
+					var objectName = enumerator.Current;
+					if (enumerator.MoveNext())
+					{
+						var itemName = enumerator.Current;
+						yield return new Tuple<string, string>(objectName, itemName);
+					}
+					else
+					{
+						yield return new Tuple<string, string>(objectName, string.Empty);
+					}
+				}
+		
 			}
 		}
 	}

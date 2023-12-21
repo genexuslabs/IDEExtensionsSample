@@ -2,10 +2,6 @@
 using Artech.Architecture.Common.Services;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
-using Artech.Genexus.Common.Parts.Layout;
-using System;
-using System.Linq;
-using static Artech.Genexus.Common.Properties;
 using Attribute = Artech.Genexus.Common.Objects.Attribute;
 
 namespace GeneXus.Packages.SupportTools.Fixing
@@ -13,7 +9,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 	public class FixDateAttributes : FixObjects
 	{
 		public FixDateAttributes()
-			: base(Resources.FixDateAttributesTitle, Resources.FixDateAtributesDescription)
+			: base(Resources.FixDateAttributesTitle, Resources.FixDateAttributesDescription)
 		{ }
 
 		public static bool ExecuteTool(KBModel model)
