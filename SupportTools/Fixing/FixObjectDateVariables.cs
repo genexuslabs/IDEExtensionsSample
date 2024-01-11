@@ -1,6 +1,5 @@
 ﻿using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
-using Artech.Architecture.Language.Parser.Data;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Parts;
 
