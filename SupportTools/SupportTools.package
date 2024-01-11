@@ -14,6 +14,7 @@
   <!-- These are locally defined commands -->
   <Commands>
     <CommandDefinition id ="ShortenNames" />
+    <CommandDefinition id ="FixTblDescriptions" shortcut="Ctrl6" />
     <CommandDefinition id ="FixObjectDateVariables" shortcut="Ctrl7" />
     <CommandDefinition id ="FixDateAttributes" shortcut="Ctrl8" />
     <CommandDefinition id ="FixProcs" shortcut="Ctrl9" />
@@ -24,6 +25,7 @@
     <!-- This group refers to the Advanced group in the Tools menu -->
     <Group refid='AdvancedGroup' package='98121D96-A7D8-468b-9310-B1F468F812AE'>
       <Command refid="ShortenNames" />
+      <Command refid="FixTblDescriptions" />
       <Command refid="FixObjectDateVariables" />
       <Command refid="FixDateAttributes" />
       <Command refid="FixProcs" />

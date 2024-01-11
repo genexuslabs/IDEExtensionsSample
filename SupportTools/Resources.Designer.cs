@@ -139,6 +139,26 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to make sure Table Descriptions are no longer than 27 characters.
+        ///
+        ///Please type below the name of tables to fix (or &apos;*&apos; to consider all tables):.
+        /// </summary>
+        internal static string FixTblDescsDescriptions {
+            get {
+                return ResourceManager.GetString("FixTblDescsDescriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Table Descriptions.
+        /// </summary>
+        internal static string FixTblDescsTitle {
+            get {
+                return ResourceManager.GetString("FixTblDescsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to no need to rename.
         /// </summary>
         internal static string NotRenamed {

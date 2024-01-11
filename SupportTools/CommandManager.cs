@@ -15,6 +15,7 @@ namespace GeneXus.Packages.SupportTools
 			AddCommand(CommandKeys.FixProcs, ExecFixProcs, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixDateAttributes, ExecFixDateAttributes, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixObjectDateVariables, ExecFixObjectDateVariables, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixTblDescriptions, ExecFixTblDescriptions, QueryProcessingCommand);
 		}
 
 		private bool QueryProcessingCommand(CommandData commandData, ref CommandStatus status)
@@ -52,6 +53,12 @@ namespace GeneXus.Packages.SupportTools
 		public bool ExecFixObjectDateVariables(CommandData commandData)
 		{
 			FixObjectDateVariables.ExecuteTool(UIServices.KB.CurrentModel);
+			return true;
+		}
+
+		public bool ExecFixTblDescriptions(CommandData commandData)
+		{
+			FixTableDescriptions.ExecuteTool(UIServices.KB.CurrentModel);
 			return true;
 		}
 	}
