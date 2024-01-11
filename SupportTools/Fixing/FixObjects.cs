@@ -1,6 +1,7 @@
 ﻿using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
 using Artech.Architecture.UI.Framework.Services;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace GeneXus.Packages.SupportTools.Fixing
@@ -55,6 +56,33 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			return success;
 		}
 
-		protected abstract void ProcessObjectName(KBModel model, string name);
+		protected abstract KBObject GetSingleObject(KBModel model, string name);
+
+		protected abstract IEnumerable<KBObject> GetAllObjects(KBModel model);
+
+		protected abstract void ProcessObject(KBObject obj, bool warnIfNoNeed = false);
+
+		protected virtual void ProcessObjectName(KBModel model, string name)
+		{
+			IOutputService output = CommonServices.Output;
+
+			if (name.Equals("*"))
+			{
+				foreach (var objItem in GetAllObjects(model))
+				{
+					ProcessObject(objItem);
+				}
+				return;
+			}
+
+			var obj = GetSingleObject(model, name);
+			if (obj == null)
+			{
+				output.AddWarningLine($"Could not find Object {name}");
+				return;
+			}
+
+			ProcessObject(obj, true);
+		}
 	}
 }

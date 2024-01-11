@@ -30,12 +30,12 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			this.maxObjDescLen = maxObjDescLen;
 		}
 
-		protected virtual KBObject GetSingleObject(KBModel model, string name)
+		protected override KBObject GetSingleObject(KBModel model, string name)
 		{
 			return model.Objects.Get(EntityType.DEFAULT_NAMESPACE, new QualifiedName(name));
 		}
 
-		protected virtual IEnumerable<KBObject> GetAllObjects(KBModel model)
+		protected override IEnumerable<KBObject> GetAllObjects(KBModel model)
 		{
 			foreach (var obj in Transaction.GetAll(model))
 				yield return obj;
@@ -47,45 +47,24 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				yield return obj;
 		}
 
-		protected override void ProcessObjectName(KBModel model, string name)
+		protected override void ProcessObject(KBObject obj, bool warnIfNoNeed = false)
 		{
 			IOutputService output = CommonServices.Output;
-			output.AddLine($"Processing {name}");
+			string typeName = $"{obj.TypeDescriptor.Description} '{obj.Name}'";
 
-			if (name.Equals("*"))
-			{
-				foreach (var objItem in GetAllObjects(model))
-				{
-					ProcessObject(output, objItem);
-				}
-				return;
-			}
-
-			var obj = GetSingleObject(model, name);
-			if (obj == null)
-			{
-				output.AddWarningLine($"Could not find Object {name}");
-				return;
-			}
-
-			ProcessObject(output, obj, true);
-		}
-
-		private void ProcessObject(IOutputService output, KBObject obj, bool warnIfNoNeed = false)
-		{
 			var objDescription = obj.Description;
 			if (objDescription.Length <= maxObjDescLen)
 			{
 				if (warnIfNoNeed)
 				{
-					output.AddWarningLine($"{obj.TypeDescriptor} {obj.Name} description does not need to be fixed");
+					output.AddWarningLine($"{typeName} description does not need to be fixed");
 				}
 				return;
 			}
 
 			obj.SetPropertyValue(Properties.TRN.Description, objDescription.Substring(0, maxObjDescLen));
 			obj.Save();
-			output.AddLine($"{obj.TypeDescriptor} {obj.Name} was adjusted");
+			output.AddLine($"{typeName} was adjusted");
 		}
 	}
 }
