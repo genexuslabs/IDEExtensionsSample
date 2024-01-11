@@ -184,6 +184,14 @@ Please type below the pairs of {object, variable} names of variables to fix (sep
   <data name="FixProcsTitle" xml:space="preserve">
     <value>Fix Converted Procs</value>
   </data>
+  <data name="FixObjDescsDescriptions" xml:space="preserve">
+    <value>This tool allows you to make sure Object Descriptions are no longer than 50 characters.
+
+Please type below the name of tables to fix (or '*' to consider all Transaction, Procedures and Work Panels):</value>
+  </data>
+  <data name="FixObjDescsTitle" xml:space="preserve">
+    <value>Fix Object Descriptions</value>
+  </data>
   <data name="FixTblDescsDescriptions" xml:space="preserve">
     <value>This tool allows you to make sure Table Descriptions are no longer than 27 characters.
 

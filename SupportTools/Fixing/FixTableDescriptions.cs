@@ -1,66 +1,39 @@
 ﻿using Artech.Architecture.Common.Objects;
-using Artech.Architecture.Common.Services;
-using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
+using System.Collections.Generic;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
-	public class FixTableDescriptions : FixObjects
+	public class FixTableDescriptions : FixObjectDescriptions
 	{
 		static readonly int defaultMaxTblDescLen = 27;
-		public static bool ExecuteTool(KBModel model)
+
+		public static new bool ExecuteTool(KBModel model)
 		{
 			var instance = new FixTableDescriptions();
 			return instance.Execute(model);
 		}
 
-		private readonly int maxTblDescLen;
-
 		public FixTableDescriptions()
-			: this(FixTableDescriptions.defaultMaxTblDescLen) { }
+			: this(FixTableDescriptions.defaultMaxTblDescLen)
+		{ }
 
 		public FixTableDescriptions(int maxTblDescLen)
-			: base(Resources.FixTblDescsTitle, Resources.FixTblDescsDescriptions)
+			: base(maxTblDescLen)
 		{
-			this.maxTblDescLen = maxTblDescLen;
+			Title = Resources.FixTblDescsTitle;
+			Description = Resources.FixTblDescsDescriptions;
 		}
 
-		protected override void ProcessObjectName(KBModel model, string name)
+		protected override KBObject GetSingleObject(KBModel model, string name)
 		{
-			IOutputService output = CommonServices.Output;
-			output.AddLine($"Processing {name}");
-
-			if (name.Equals("*"))
-			{
-				foreach (Table tbl in Table.GetAll(model))
-				{
-					ProcessTable(output, tbl);
-				}
-				return;
-			}
-
-			KBObject table = Table.Get(model, name);
-			if (table == null)
-			{
-				output.AddWarningLine($"Could not find Table {name}");
-				return;
-			}
-
-			ProcessTable(output, table);
+			return Table.Get(model, name);
 		}
 
-		private void ProcessTable(IOutputService output, KBObject table)
+		protected override IEnumerable<KBObject> GetAllObjects(KBModel model)
 		{
-			var tblDescription = table.Description;
-			if (tblDescription.Length <= maxTblDescLen)
-			{
-				output.AddWarningLine($"Table {table.Name} description does not need to be fixed");
-				return;
-			}
-
-			table.SetPropertyValue(Properties.TBL.Description, tblDescription.Substring(0, maxTblDescLen));
-			table.Save();
-			output.AddLine($"Table {table.Name} was adjusted");
+			foreach (Table tbl in Table.GetAll(model))
+				yield return tbl;
 		}
 	}
 }

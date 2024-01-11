@@ -101,6 +101,26 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to make sure Object Descriptions are no longer than 50 characters.
+        ///
+        ///Please type below the name of tables to fix (or &apos;*&apos; to consider all Transaction, Procedures and Work Panels):.
+        /// </summary>
+        internal static string FixObjDescsDescriptions {
+            get {
+                return ResourceManager.GetString("FixObjDescsDescriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Object Descriptions.
+        /// </summary>
+        internal static string FixObjDescsTitle {
+            get {
+                return ResourceManager.GetString("FixObjDescsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Fix Procs.
         /// </summary>
         internal static string FixProcs {
