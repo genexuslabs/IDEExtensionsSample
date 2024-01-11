@@ -6,19 +6,18 @@ using Artech.Genexus.Common.Parts.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
-	public class FixProcs : FixObjects
+	public class FixProcsPrintSettings : FixObjects
 	{
-		public FixProcs()
+		public FixProcsPrintSettings()
 			: base (Resources.FixProcsTitle, Resources.FixProcsToolDescription)
 		{}
 
 		public static bool ExecuteTool(KBModel model)
 		{
-			var instance = new FixProcs();
+			var instance = new FixProcsPrintSettings();
 			return instance.Execute(model);
 		}
 

@@ -12,7 +12,7 @@ namespace GeneXus.Packages.SupportTools
 		public CommandManager()
 		{
 			AddCommand(CommandKeys.ShortenNames, ExecShortenNames, QueryProcessingCommand);
-			AddCommand(CommandKeys.FixProcs, ExecFixProcs, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixProcs, ExecFixProcsPrintSettings, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixDateAttributes, ExecFixDateAttributes, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixObjectDateVariables, ExecFixObjectDateVariables, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixObjDescriptions, ExecFixObjDescriptions, QueryProcessingCommand);
@@ -39,9 +39,9 @@ namespace GeneXus.Packages.SupportTools
 			return true;
 		}
 
-		public bool ExecFixProcs(CommandData commandData)
+		public bool ExecFixProcsPrintSettings(CommandData commandData)
 		{
-			FixProcs.ExecuteTool(UIServices.KB.CurrentModel);
+			FixProcsPrintSettings.ExecuteTool(UIServices.KB.CurrentModel);
 			return true;
 		}
 

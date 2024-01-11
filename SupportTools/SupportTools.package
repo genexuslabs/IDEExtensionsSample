@@ -18,7 +18,7 @@
     <CommandDefinition id ="FixTblDescriptions" shortcut="Ctrl6" />
     <CommandDefinition id ="FixObjectDateVariables" shortcut="Ctrl7" />
     <CommandDefinition id ="FixDateAttributes" shortcut="Ctrl8" />
-    <CommandDefinition id ="FixProcs" shortcut="Ctrl9" />
+    <CommandDefinition id ="FixProcsPrintSettings" shortcut="Ctrl9" />
   </Commands>
 
   <!-- You can group commands and then reference them by the group id-->
@@ -30,7 +30,7 @@
       <Command refid="FixTblDescriptions" />
       <Command refid="FixObjectDateVariables" />
       <Command refid="FixDateAttributes" />
-      <Command refid="FixProcs" />
+      <Command refid="FixProcsPrintSettings" />
     </Group>
   </Groups>
 

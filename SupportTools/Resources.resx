@@ -154,8 +154,8 @@ Please select below for which categories of objects you want to shorten names.</
   <data name="Renamed" xml:space="preserve">
     <value>renamed to '{0}'</value>
   </data>
-  <data name="FixProcs" xml:space="preserve">
-    <value>&amp;Fix Procs</value>
+  <data name="FixProcsPrintSettings" xml:space="preserve">
+    <value>&amp;Fix Procs Print Settings</value>
   </data>
   <data name="FixProcsSections" xml:space="preserve">
     <value>Fix Converted Procs</value>

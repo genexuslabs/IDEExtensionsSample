@@ -121,11 +121,11 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Fix Procs.
+        ///   Looks up a localized string similar to &amp;Fix Procs Print Settings.
         /// </summary>
-        internal static string FixProcs {
+        internal static string FixProcsPrintSettings {
             get {
-                return ResourceManager.GetString("FixProcs", resourceCulture);
+                return ResourceManager.GetString("FixProcsPrintSettings", resourceCulture);
             }
         }
         
