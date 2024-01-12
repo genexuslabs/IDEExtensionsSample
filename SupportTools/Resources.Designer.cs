@@ -224,6 +224,26 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set Objects to not be generated.
+        /// </summary>
+        internal static string SetObjectsToNotGenerate {
+            get {
+                return ResourceManager.GetString("SetObjectsToNotGenerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to modify objects so they are not generated on build time (ie: property &apos;Generate Object&apos; is set to false).
+        ///
+        ///Please type below the names of objects to modify (separated by commas, spaces or lines):.
+        /// </summary>
+        internal static string SetObjectsToNotGenerateDescription {
+            get {
+                return ResourceManager.GetString("SetObjectsToNotGenerateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Shorten Names.
         /// </summary>
         internal static string ShortenNames {

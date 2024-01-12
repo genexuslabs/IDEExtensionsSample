@@ -200,4 +200,12 @@ Please type below the name of tables to fix (or '*' to consider all tables):</va
   <data name="FixTblDescsTitle" xml:space="preserve">
     <value>Fix Table Descriptions</value>
   </data>
+  <data name="SetObjectsToNotGenerate" xml:space="preserve">
+    <value>Set Objects to not be generated</value>
+  </data>
+  <data name="SetObjectsToNotGenerateDescription" xml:space="preserve">
+    <value>This tool allows you to modify objects so they are not generated on build time (ie: property 'Generate Object' is set to false).
+
+Please type below the names of objects to modify (separated by commas, spaces or lines):</value>
+  </data>
 </root>
