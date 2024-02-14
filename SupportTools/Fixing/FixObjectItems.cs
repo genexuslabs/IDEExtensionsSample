@@ -39,7 +39,9 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				return false;
 
 			IOutputService output = CommonServices.Output;
-			output.Show(output.GetDefaultOutputId());
+			string outputId = output.GetDefaultOutputId();
+			output.SelectOutput(outputId);
+			output.Show(outputId);
 			output.StartSection(Title, Title);
 			bool success = false;
 
