@@ -179,6 +179,26 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This tool allows you to check the impact on procedures of extending the width of a domain by 1 column.
+        ///
+        ///Please type below the names of domains for which to check the impact of changing them (separated by commas, spaces or lines):.
+        /// </summary>
+        internal static string ImpactProcsN7toN8Description {
+            get {
+                return ResourceManager.GetString("ImpactProcsN7toN8Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check impact on procedures of extending the width of a domain.
+        /// </summary>
+        internal static string ImpactProcsN7toN8Title {
+            get {
+                return ResourceManager.GetString("ImpactProcsN7toN8Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to no need to rename.
         /// </summary>
         internal static string NotRenamed {

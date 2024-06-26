@@ -18,6 +18,7 @@ namespace GeneXus.Packages.SupportTools
 			AddCommand(CommandKeys.FixObjDescriptions, ExecFixObjDescriptions, QueryProcessingCommand);
 			AddCommand(CommandKeys.FixTblDescriptions, ExecFixTblDescriptions, QueryProcessingCommand);
 			AddCommand(CommandKeys.SetObjsNoGen, ExecSetObjsNoGen, QueryProcessingCommand);
+			AddCommand(CommandKeys.ImpactProcsN7toN8, ExecImpactProcsN7toN8, QueryProcessingCommand);
 		}
 
 		private bool QueryProcessingCommand(CommandData commandData, ref CommandStatus status)
@@ -49,6 +50,12 @@ namespace GeneXus.Packages.SupportTools
 		public bool ExecFixDateAttributes(CommandData commandData)
 		{
 			FixDateAttributes.ExecuteTool(UIServices.KB.CurrentModel);
+			return true;
+		}
+		
+		public bool ExecImpactProcsN7toN8(CommandData commandData)
+		{
+			ImpactProcsN7toN8.ExecuteTool(UIServices.KB.CurrentModel);
 			return true;
 		}
 

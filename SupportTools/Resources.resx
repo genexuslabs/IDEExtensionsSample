@@ -208,4 +208,12 @@ Please type below the name of tables to fix (or '*' to consider all tables):</va
 
 Please type below the names of objects to modify (separated by commas, spaces or lines):</value>
   </data>
+  <data name="ImpactProcsN7toN8Description" xml:space="preserve">
+    <value>This tool allows you to check the impact on procedures of extending the width of a domain by 1 column.
+
+Please type below the names of domains for which to check the impact of changing them (separated by commas, spaces or lines):</value>
+  </data>
+  <data name="ImpactProcsN7toN8Title" xml:space="preserve">
+    <value>Check impact on procedures of extending the width of a domain</value>
+  </data>
 </root>
