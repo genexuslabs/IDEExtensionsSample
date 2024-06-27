@@ -12,5 +12,6 @@ namespace GeneXus.Packages.SupportTools
 		public static CommandKey FixObjDescriptions => new CommandKey(Package.Guid, "FixObjDescriptions");
 		public static CommandKey FixTblDescriptions => new CommandKey(Package.Guid, "FixTblDescriptions");
 		public static CommandKey ImpactProcsN7toN8 => new CommandKey(Package.Guid, "ImpactProcsN7toN8");
+		public static CommandKey ImpactSDTsN7toN8 => new CommandKey(Package.Guid, "ImpactSDTsN7toN8");
 	}
 }
