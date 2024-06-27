@@ -210,7 +210,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 												// 1 is needed to allow grow, 1 for a blank space.
 				)
 				{
-					string message = $"Proc {band.KBObject.Name}: on {band.Name}, {attControl.Name} takes columns {attControl.X}-{rightBorder} and {control.Name} starts on column {control.X}";
+					string message = $"{band.KBObject.Name}, {band.Name}, {attControl.Name} ends on column {rightBorder} and {control.Name} starts on column {control.X}";	
 					output.AddLine(message);
 
 					// Append the message to a file named "output.txt" in the current working directory
