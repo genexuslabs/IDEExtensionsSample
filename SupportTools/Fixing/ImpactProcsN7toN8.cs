@@ -112,15 +112,16 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 			List<Variable> vars = new List<Variable>();
 			// get all varibles based on Domain or any attribute
-			foreach (var variItem in proc.Variables.Variables)
+			foreach (var v in proc.Variables.Variables)
 			{
-				if (variItem.AttributeBasedOn != null && atts.Any(att => att.Id == variItem.AttributeBasedOn.Id) ||
-					variItem.DomainBasedOn != null && variItem.DomainBasedOn.Id == domain.Id ||
-					// variItem.Type == eDBType.NUMERIC && variItem.Length == 7 && variItem.Decimals == 0 ||
+				if (
+					( v.AttributeBasedOn != null && atts.ContainsKey(v.AttributeBasedOn.Id) ) ||
+					( v.DomainBasedOn != null && domain != null && v.DomainBasedOn.Id == domain.Id ) ||
+					// ( v.Type == eDBType.NUMERIC && v.Length == 7 && v.Decimals == 0 ) ||
 					false
-					) 
+				) 
 				{
-					vars.Add(variItem);
+					vars.Add(v);
 				}
 			}
 
