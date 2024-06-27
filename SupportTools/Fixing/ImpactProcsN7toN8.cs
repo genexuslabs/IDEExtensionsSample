@@ -45,11 +45,11 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			IOutputService output = CommonServices.Output;
 
 			Domain domain = attOrDom as Domain;
-			var atts = new List<Attribute>();
+			var atts = new Dictionary<int, Attribute>();
 			var procKeys = new HashSet<EntityKey>();
 
 			if (attOrDom is Attribute)
-				atts.Add(attOrDom as Attribute);
+				atts[attOrDom.Id] = attOrDom as Attribute;
 			else if (domain != null)
 			{
 				// Get all atributes (and procs) that are based on (or reference) this domain
@@ -59,9 +59,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					{
 						var att = Attribute.Get(attOrDom.Model, obj.From) as Attribute;
 						if (att != null)
-						{
-							atts.Add(att);
-						}
+							atts[att.Id] = att;
 					}
 					else if (obj.From.Type == typeof(Procedure).GUID)
 					{
@@ -72,7 +70,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 			// Get all procedures that use these attributes
 			procKeys.UnionWith(
-				atts.SelectMany(att => att.GetReferencesTo(LinkType.UsedObject))
+				atts.Values.SelectMany(att => att.GetReferencesTo(LinkType.UsedObject))
 					.Where(r => r.From.Type == typeof(Procedure).GUID)
 					.Select(r => r.From));
 
@@ -91,7 +89,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			output.AddLine($"Found {problems} problems impacting {impactCount} procedures from a total {procKeys.Count} that use '{attOrDom.Name}'");
 		}
 
-		private int CheckImpact(KBModel model, EntityKey key, Domain domain, IEnumerable<Attribute> atts)
+		private int CheckImpact(KBModel model, EntityKey key, Domain domain, Dictionary<int, Attribute> atts)
 		{
 			IOutputService output = CommonServices.Output;
 			var proc = Procedure.Get(model, key) as Procedure;
@@ -104,7 +102,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			return CheckImpact(proc, domain, atts);
 		}
 
-		private int CheckImpact(Procedure proc, Domain domain, IEnumerable<Attribute> atts)
+		private int CheckImpact(Procedure proc, Domain domain, Dictionary<int, Attribute> atts)
 		{
 			IOutputService output = CommonServices.Output;
 			if (!ProcHasPrintStatements(proc))
@@ -151,7 +149,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			return true;
 		}
 
-		private static int CheckPrintblocks(Procedure proc, Domain domain, IEnumerable<Attribute> atts, IEnumerable<Variable> vars)
+		private static int CheckPrintblocks(Procedure proc, Domain domain, Dictionary<int, Attribute> atts, IEnumerable<Variable> vars)
 		{
 			IOutputService output = CommonServices.Output;
 			var layoutPart = proc.Layout;
@@ -175,7 +173,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 					var attId = attControl.AttributeId;
 					if (
-						(typedObject is Attribute && atts.Any(a => a.Id == attId)) ||
+						(typedObject is Attribute && atts.ContainsKey(attId)) ||
 						vars.Any(v => v.Id == attId)
 					)
 					{
