@@ -76,7 +76,9 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				{
 					string message = $"&{v.Name} in {kbObject.Name} is {v.Type.ToString()}(7.0)";
 					output.AddLine(message);
-					File.AppendAllText(filePath, message + Environment.NewLine);
+
+					string csvMessage = $"{kbObject.Name},{v.Name},{v.Type.ToString()}(7.0){Environment.NewLine}";
+					File.AppendAllText(filePath, csvMessage);
 					problems++;
 				}
 			}

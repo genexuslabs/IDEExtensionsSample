@@ -216,8 +216,8 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					string message = $"{band.KBObject.Name}, {band.Name}, {attControl.Name} ends on column {rightBorder} and {control.Name} starts on column {control.X}";	
 					output.AddLine(message);
 
-					// Append the message to a file named "output.txt" in the current working directory
-					File.AppendAllText(filePath, message + System.Environment.NewLine);
+					string csvMessage = $"{band.KBObject.Name},{band.Name},{attControl.Name},{rightBorder},{control.Name},{control.X}{System.Environment.NewLine}";
+					File.AppendAllText(filePath, csvMessage);
 
 					return true;
 				}
