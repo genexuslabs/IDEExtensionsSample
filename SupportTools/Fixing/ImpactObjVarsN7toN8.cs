@@ -1,21 +1,11 @@
-using Artech.Architecture.Common.Deployment;
-using Artech.Architecture.Common.Helpers.Check;
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
-using Artech.Common.Collections;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
-using Artech.Genexus.Common.Parts.Layout;
 using Artech.Genexus.Common.Parts.Providers;
-using Artech.Genexus.Common.Parts.SDT;
-using Artech.Udm.Framework;
-using Artech.Udm.Framework.References;
 using System;
+using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using static Artech.Genexus.Common.Properties;
-using Attribute = Artech.Genexus.Common.Objects.Attribute;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
@@ -63,6 +53,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 		private int CheckImpact(KBObject kbObject)
 		{
 			IOutputService output = CommonServices.Output;
+			string filePath = Path.Combine(kbObject.KB.Location, "check_allvars.txt");
 			int problems = 0;
 
 			// Get VariablesPart
@@ -83,7 +74,9 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					true
 				)
 				{
-					output.AddLine($"{v.Name} in {kbObject.Name} is {v.Type.ToString()}(7.0)");
+					string message = $"&{v.Name} in {kbObject.Name} is {v.Type.ToString()}(7.0)";
+					output.AddLine(message);
+					File.AppendAllText(filePath, message + Environment.NewLine);
 					problems++;
 				}
 			}

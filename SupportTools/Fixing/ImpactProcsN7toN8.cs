@@ -6,6 +6,7 @@ using Artech.Genexus.Common.Parts.Layout;
 using Artech.Udm.Framework;
 using Artech.Udm.Framework.References;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Attribute = Artech.Genexus.Common.Objects.Attribute;
@@ -192,6 +193,8 @@ namespace GeneXus.Packages.SupportTools.Fixing
 		private static bool CheckAttControlInPrintblock(ReportBand band, ReportAttribute attControl)
 		{
 			IOutputService output = CommonServices.Output;
+			string filePath = Path.Combine(band.KBObject.KB.Location, "check_procs.txt");
+
 			int rightBorder = attControl.X + attControl.Width - 1;
 			foreach (var control in band.Controls)
 			{
@@ -214,8 +217,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					output.AddLine(message);
 
 					// Append the message to a file named "output.txt" in the current working directory
-					string filePath = System.IO.Path.Combine(band.KBObject.KB.Location, "check_procs.txt");
-					System.IO.File.AppendAllText(filePath, message + System.Environment.NewLine);
+					File.AppendAllText(filePath, message + System.Environment.NewLine);
 
 					return true;
 				}

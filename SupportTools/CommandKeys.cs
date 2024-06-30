@@ -1,4 +1,5 @@
 using Artech.Common.Framework.Commands;
+using GeneXus.Packages.SupportTools.Fixing;
 
 namespace GeneXus.Packages.SupportTools
 {
@@ -13,5 +14,6 @@ namespace GeneXus.Packages.SupportTools
 		public static CommandKey FixTblDescriptions => new CommandKey(Package.Guid, "FixTblDescriptions");
 		public static CommandKey ImpactProcsN7toN8 => new CommandKey(Package.Guid, "ImpactProcsN7toN8");
 		public static CommandKey ImpactSDTsN7toN8 => new CommandKey(Package.Guid, "ImpactSDTsN7toN8");
+		public static CommandKey ImpactObjVarsN7toN8 => new CommandKey(Package.Guid, "ImpactObjVarsN7toN8");
 	}
 }
