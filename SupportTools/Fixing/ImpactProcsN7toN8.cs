@@ -116,11 +116,11 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			foreach (var v in proc.Variables.Variables)
 			{
 				if (
-					( v.AttributeBasedOn != null && atts.ContainsKey(v.AttributeBasedOn.Id) ) ||
-					( v.DomainBasedOn != null && domain != null && v.DomainBasedOn.Id == domain.Id ) ||
+					(v.AttributeBasedOn != null && atts.ContainsKey(v.AttributeBasedOn.Id)) ||
+					(v.DomainBasedOn != null && domain != null && v.DomainBasedOn.Id == domain.Id) ||
 					// ( v.Type == eDBType.NUMERIC && v.Length == 7 && v.Decimals == 0 ) ||
 					false
-				) 
+				)
 				{
 					vars.Add(v);
 				}
@@ -198,6 +198,15 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			int rightBorder = attControl.X + attControl.Width - 1;
 			foreach (var control in band.Controls)
 			{
+				var label = control as ReportLabel;
+				bool isSemicolon = label != null && label.Text.StartsWith(";");
+
+				// Next controls in line must start at least in rightborder + 3, since
+				// 1 is needed to allow growth and 1 is needed to allow for a blank space.
+				// In the case of a semicolon, it can be right next to the previous control, so
+				// only the growth space is needed.
+				int minimumDistance = isSemicolon ? 2 : 3;
+
 				if (
 					// not the same control
 					control.Name != attControl.Name &&
@@ -208,19 +217,23 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 					// starts after attControl
 					control.X > attControl.X &&
+
 					// but not enough to the right
-					control.X - rightBorder < 3 // must start at least in rightborder + 3
-												// 1 is needed to allow grow, 1 for a blank space.
+					control.X - rightBorder < minimumDistance
 				)
 				{
-					string message = $"{band.KBObject.Name}, {band.Name}, {attControl.Name} ends on column {rightBorder} and {control.Name} starts on column {control.X}";	
-					output.AddLine(message);
+					string controlId = label != null ? $"'{label.Text}'" : control.Name;
 
-					string csvMessage = $"{band.KBObject.Name},{band.Name},{attControl.Name},{rightBorder},{control.Name},{control.X}{System.Environment.NewLine}";
+					string message = $"{band.KBObject.Name}, {band.Name}, {attControl.Name} ends on column {rightBorder} and {controlId} starts on column {control.X}.";
+
+					string csvMessage = $"{band.KBObject.Name},{band.Name},{attControl.Name},{rightBorder},{controlId},{control.X}{System.Environment.NewLine}";
+
+					output.AddLine(message);
 					File.AppendAllText(filePath, csvMessage);
 
 					return true;
 				}
+
 			}
 			return false;
 		}
