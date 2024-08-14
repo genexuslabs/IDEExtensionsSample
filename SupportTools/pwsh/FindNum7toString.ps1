@@ -1,8 +1,14 @@
 param (
     [Parameter(Mandatory=$true)]
     [string]$FolderPath,
-    [string]$FilePattern = "*.cob"
+
+    [string]$FilePattern = "*.cob",
+
+    [Parameter(Mandatory=$true)]
+    [int]$NumLength
 )
+
+$searchPattern = "MOVE $NumLength TO GX-STR-LEN"
 
 # Check if the folder path exists
 if (-Not (Test-Path -Path $FolderPath)) {
@@ -20,9 +26,9 @@ foreach ($file in $files) {
     
     # Iterate over the lines to find the match
     for ($i = 1; $i -lt $lines.Length; $i++) {
-        if ($lines[$i].Trim() -eq "MOVE 7 TO GX-STR-LEN") {
+        if ($lines[$i].Trim() -eq $searchPattern) {
             # Print the file name and the previous line, trimmed of leading and trailing spaces
-            $previousLine = $lines[$i - 1].Trim()
+            $previousLine = $lines[$i - 1].Trim()   
             # if previousLine doesnt start with "MOVE " take also the previous line
             if ($previousLine -notlike "MOVE *") {
                 $previousLine2 = $lines[$i - 2].Trim()
