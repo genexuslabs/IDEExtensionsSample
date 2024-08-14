@@ -6,9 +6,9 @@
 .DESCRIPTION
     This script searches for files in a specified folder that match a pattern used to
     convert a numeric variable of a given length to a string.
-    The output are lines specifying the file on which the pattern was found and the
-    name of the detected GeneXus numeric variable or attribute that is converted to
-    a string.
+    The output are lines specifying the file on which the pattern was found, the name
+    of the COBOL var being converted, and a guess of the name of the related GeneXus
+    variable or attribute.
 
 .PARAMETER FolderPath
     The path to the folder containing the files to be processed. This parameter is mandatory.
@@ -65,11 +65,25 @@ foreach ($file in $files) {
                 $previousLine = $previousLine2 + " " + $previousLine
             }
 
-            # on $previousLine remove leading "MOVE " and trailing " TO GX-STR-NUM"
-            $previousLine = $previousLine -replace "^MOVE ", ""
-            $previousLine = $previousLine -replace " TO GX-STR-NUM$", ""
+            # isolate COBOL variable name
+            $cobolVar = $previousLine -replace "^MOVE ", "" -replace " TO GX-STR-NUM$", ""
 
-            Write-Output "$($file.Name),$previousLine"
+            # guess GX variable or attribute name
+            $gxVarOrAtt = $cobolVar -replace "^GXV-", "" -replace "^V\d+", "&"
+
+            # or the use of a function
+            if ($gxVarOrAtt -eq "GX-YEAR-YY")
+            {
+				$gxVarOrAtt = "Result of year(...)"
+			}
+            # check for the "GXINT-*" case
+            elseif ($gxVarOrAtt -like "GXINT-*")
+			{
+                $gxVarOrAtt = "Result of int(...)"
+            }
+
+
+            Write-Output "$($file.Name),$cobolVar,$gxVarOrAtt"
         }
     }
 }
