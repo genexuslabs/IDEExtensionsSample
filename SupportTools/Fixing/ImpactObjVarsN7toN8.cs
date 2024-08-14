@@ -50,7 +50,11 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			output.AddLine($"Found {problems} problems impacting {impactCount} {collectiveName} from a total {total}");
 		}
 
-		private const int NumLengthToCheck = 4;
+		private readonly int NumLengthToCheck = 4;
+		private readonly string[] suspectNames = { "cuenta", "cta" };
+
+		// private readonly int NumLengthToCheck = 7;
+		// private string[] suspectNames = { "contrato", "cntr" };
 
 		private int CheckImpact(KBObject kbObject)
 		{
@@ -76,10 +80,18 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					true
 				)
 				{
+					bool suspect = // check if the variable name is a suspect
+						Array.Exists(suspectNames, element => v.Name.ToLower().Contains(element));
+
 					string message = $"&{v.Name} in {kbObject.Name} is {v.Type.ToString()}({NumLengthToCheck}.0)";
+					if (suspect)
+					{
+						message += " (suspect name)";
+
+					}
 					output.AddLine(message);
 
-					string csvMessage = $"{kbObject.Name},{v.Name},{v.Type.ToString()}({NumLengthToCheck}.0){Environment.NewLine}";
+					string csvMessage = $"{kbObject.Name},{v.Name},{v.Type.ToString()}({NumLengthToCheck}.0),{suspect}{Environment.NewLine}";
 					File.AppendAllText(filePath, csvMessage);
 					problems++;
 				}
