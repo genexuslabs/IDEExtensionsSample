@@ -50,6 +50,8 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			output.AddLine($"Found {problems} problems impacting {impactCount} {collectiveName} from a total {total}");
 		}
 
+		private const int NumLengthToCheck = 4;
+
 		private int CheckImpact(KBObject kbObject)
 		{
 			IOutputService output = CommonServices.Output;
@@ -61,7 +63,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			foreach (var v in infoProvider.Variables)
 			{
 				if (
-					v.Length == 7 &&
+					v.Length == NumLengthToCheck &&
 					v.Decimals == 0 &&
 					(
 						v.Type == eDBType.CHARACTER ||
@@ -74,10 +76,10 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					true
 				)
 				{
-					string message = $"&{v.Name} in {kbObject.Name} is {v.Type.ToString()}(7.0)";
+					string message = $"&{v.Name} in {kbObject.Name} is {v.Type.ToString()}({NumLengthToCheck}.0)";
 					output.AddLine(message);
 
-					string csvMessage = $"{kbObject.Name},{v.Name},{v.Type.ToString()}(7.0){Environment.NewLine}";
+					string csvMessage = $"{kbObject.Name},{v.Name},{v.Type.ToString()}({NumLengthToCheck}.0){Environment.NewLine}";
 					File.AppendAllText(filePath, csvMessage);
 					problems++;
 				}
