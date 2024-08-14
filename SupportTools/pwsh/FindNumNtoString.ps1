@@ -1,3 +1,33 @@
+<#
+.SYNOPSIS
+    Processes COBOL files in a specified folder and extracts info about detected
+    conversions from a numeric variable of a given length to an string
+
+.DESCRIPTION
+    This script searches for files in a specified folder that match a pattern used to
+    convert a numeric variable of a given length to a string.
+    The output are lines specifying the file on which the pattern was found and the
+    name of the detected GeneXus numeric variable or attribute that is converted to
+    a string.
+
+.PARAMETER FolderPath
+    The path to the folder containing the files to be processed. This parameter is mandatory.
+
+.PARAMETER FilePattern
+    The pattern to match files in the folder. The default pattern is "*.cob".
+
+.PARAMETER NumLength
+    An integer parameter that specifies the numeric length of variables or attributes
+    for which to search their conversion to a string.
+
+.EXAMPLE
+    .\FindNumNtoString.ps1 -FolderPath "C:\MyFolder" -FilePattern "*.cob" -NumLength 7
+    This command processes all .cob files in the specified folder and searches for the pattern "MOVE 7 TO GX-STR-LEN".
+
+.NOTES
+    Author: Your Name
+    Date: Today's Date
+#>
 param (
     [Parameter(Mandatory=$true)]
     [string]$FolderPath,
