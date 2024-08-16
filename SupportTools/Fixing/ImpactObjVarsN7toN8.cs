@@ -50,11 +50,11 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			output.AddLine($"Found {problems} problems impacting {impactCount} {collectiveName} from a total {total}");
 		}
 
-		private readonly int NumLengthToCheck = 4;
-		private readonly string[] suspectNames = { "cuenta", "cta" };
+		// private readonly int NumLengthToCheck = 4;
+		// private readonly string[] suspectNames = { "cuenta", "cta" };
 
-		// private readonly int NumLengthToCheck = 7;
-		// private string[] suspectNames = { "contrato", "cntr" };
+		private readonly int NumLengthToCheck = 7;
+		private string[] suspectNames = { "contrato", "cntr" };
 
 		private int CheckImpact(KBObject kbObject)
 		{

@@ -61,6 +61,24 @@ namespace GeneXus.Packages.SupportTools {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This tools looks for attributes and variables depending on a given list of domains, makes sure their pictures are set as default, and list the changes..
+        /// </summary>
+        internal static string FixAttDependantPicturesDescription {
+            get {
+                return ResourceManager.GetString("FixAttDependantPicturesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Titles for Attributes and Vars depending on Domain.
+        /// </summary>
+        internal static string FixAttDependantPicturesTitle {
+            get {
+                return ResourceManager.GetString("FixAttDependantPicturesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This tool allows you to fix Date Attributes to make sure they use the long date format.
         ///
         ///Please type below the names of attributes to fix (separated by commas, spaces or lines):.

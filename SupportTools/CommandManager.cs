@@ -21,6 +21,7 @@ namespace GeneXus.Packages.SupportTools
 			AddCommand(CommandKeys.ImpactProcsN7toN8, ExecImpactProcsN7toN8, QueryProcessingCommand);
 			AddCommand(CommandKeys.ImpactSDTsN7toN8, ExecImpactSDTsN7toN8, QueryProcessingCommand);
 			AddCommand(CommandKeys.ImpactObjVarsN7toN8, ExecImpactObjVarsN7toN8, QueryProcessingCommand);
+			AddCommand(CommandKeys.FixAttDependantPictures, ExecFixAttDependantPictures, QueryProcessingCommand);
 		}
 
 		private bool QueryProcessingCommand(CommandData commandData, ref CommandStatus status)
@@ -58,6 +59,12 @@ namespace GeneXus.Packages.SupportTools
 		public bool ExecImpactProcsN7toN8(CommandData commandData)
 		{
 			ImpactProcsN7toN8.ExecuteTool(UIServices.KB.CurrentModel);
+			return true;
+		}
+
+		public bool ExecFixAttDependantPictures(CommandData commandData)
+		{
+			FixAttDependantPictures.ExecuteTool(UIServices.KB.CurrentModel);
 			return true;
 		}
 
