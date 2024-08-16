@@ -1,6 +1,7 @@
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
 using Artech.Genexus.Common;
+using Artech.Genexus.Common.CustomTypes;
 using Artech.Genexus.Common.Objects;
 using Artech.Genexus.Common.Parts.Layout;
 using Artech.Genexus.Common.Parts.Providers;
@@ -20,14 +21,32 @@ namespace GeneXus.Packages.SupportTools.Fixing
 {
 	public class FixAttDependantPictures : FixObjects
 	{
-		struct AttStats
+		struct FixStats
 		{
-			public int fixedAtts;
+			public FixStats()
+			{
+				fixDomains = 0;
+				totalDomains = 0;
+				fixAtts = 0;
+				totalAtts = 0;
+			}
+
+			public int fixDomains;
+			public int totalDomains;
+			public int fixAtts;
 			public int totalAtts;
 		}
 
 		struct VarStats
 		{
+			public VarStats()
+			{
+				fixedVars = 0;
+				totalVars = 0;
+				fixedObjects = 0;
+				totalObjects = 0;
+			}
+
 			public int fixedVars;
 			public int totalVars;
 			public int fixedObjects;
@@ -65,46 +84,58 @@ namespace GeneXus.Packages.SupportTools.Fixing
 		{
 			IOutputService output = CommonServices.Output;
 
-			Domain domain = attOrDom as Domain;
-			var atts = new Dictionary<int, Attribute>();
+			var atts = new Dictionary<int, KBObject>();
+			var objKeys = new HashSet<EntityKey>();
 
-			if (attOrDom is Attribute)
-				atts[attOrDom.Id] = attOrDom as Attribute;
-			else if (domain != null)
+			if (attOrDom is Attribute att)
+				atts[att.Id] = att;
+			else if (attOrDom is Domain domain)
 			{
-				// Get all atributes (and procs) that are based on (or reference) this domain
-				foreach (var obj in domain.GetReferencesTo(LinkType.UsedObject))
+				atts[domain.Id] = domain;
+				// Get all atributes (and procs) that are based on this domain
+				AddRecursiveBasedOn(attOrDom.Model, domain, atts, domain);
+			}
+
+			var fixes = FixAttPictures(atts);
+			output.AddLine($"Fixed {fixes.fixDomains}/{fixes.totalDomains} Domains and {fixes.fixAtts}/{fixes.totalAtts} Attributes");
+		}
+
+		private void AddRecursiveBasedOn(KBModel model, Domain domain, Dictionary<int, KBObject> atts, KBObject baseAtt)
+		{
+			// needs to be recursive because subtypes, although based on a domain, may not always have
+			// a direct reference (it may be through the supertype)
+			foreach (var obj in baseAtt.GetReferencesTo(LinkType.UsedObject))
+			{
+				if (obj.From.Type == typeof(Attribute).GUID)
 				{
-					if (obj.From.Type == typeof(Attribute).GUID)
+					if (!atts.ContainsKey(obj.From.Id))
 					{
-						var att = Attribute.Get(attOrDom.Model, obj.From) as Attribute;
-						if (att != null)
+						var att = Attribute.Get(model, obj.From) as Attribute;
+						if (att != null && att.DomainBasedOn == domain)
+						{
 							atts[att.Id] = att;
+							AddRecursiveBasedOn(model, domain, atts, att);
+						}
 					}
 				}
 			}
-
-
-			var attFixes = FixAttPictures(atts);
-			output.AddLine($"Fixed {attFixes.fixedAtts}/{attFixes.totalAtts} Attributes");
 		}
 
-		private void AddRecursive(KBModel model, Dictionary<int, Attribute> atts, Attribute baseAtt)
+		private FixStats FixAttPictures(Dictionary<int, KBObject> atts)
 		{
-			throw new NotImplementedException();
-		}
-
-		private AttStats FixAttPictures(Dictionary<int, Attribute> atts)
-		{
-			AttStats stats = new AttStats();
-			stats.fixedAtts = 0;
-			stats.totalAtts = 0;
+			var stats = new FixStats();
 			IOutputService output = CommonServices.Output;
 			foreach (var att in atts.Values)
 			{
 				output.AddLine($"{att.Name}");
-				stats.totalAtts++;
-				if (att.Type != eDBType.NUMERIC)
+
+				if (att is Domain)
+					stats.totalDomains++;
+				else
+					stats.totalAtts++;
+
+				var type = (eDBType) att.GetPropertyValue<AttCustomType>("ATTCUSTOMTYPE").DataType;
+				if (type != eDBType.NUMERIC)
 					continue;
 
 				if (att.IsPropertyDefault(Properties.ATT.Picture))
@@ -114,7 +145,10 @@ namespace GeneXus.Packages.SupportTools.Fixing
 
 				att.ResetProperty(Properties.ATT.Picture);
 				att.Save();
-				stats.fixedAtts++;
+				if (att is Domain)
+					stats.fixDomains++;
+				else
+					stats.fixAtts++;
 
 				string newPicture = att.GetPropertyValueString(Properties.ATT.Picture);
 				output.AddLine($"Set default picture for, Attribute, '{att.Name}', '{oldPicture}', '{newPicture}'");
