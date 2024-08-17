@@ -34,12 +34,15 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				fixedVars = 0;
 				totalVars = 0;
 				fixedObjects = 0;
+				relevantObjects = 0;
 				totalObjects = 0;
+
 			}
 
 			public int fixedVars;
 			public int totalVars;
 			public int fixedObjects;
+			public int relevantObjects;
 			public int totalObjects;
 		}
 
@@ -92,9 +95,9 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			var attFixes = EnsureDefaultPicture(atts);
 			output.AddLine($"Fixed {attFixes.fixes}/{attFixes.total} Attributes");
 
-			var dependantObjects = GetDependantObjects(atts);
+			var dependantObjects = new List<EntityKey>(GetDependantObjects(atts));
 			var varStats = FixObjVarPictures(attOrDom.Model, domains, atts, dependantObjects);
-			output.AddLine($"Fixed {varStats.fixedVars}/{varStats.totalVars} Variables in {varStats.fixedObjects}/{varStats.totalObjects} Objects");
+			output.AddLine($"Fixed {varStats.fixedVars}/{varStats.totalVars} Variables in {varStats.fixedObjects}/{varStats.relevantObjects}/{varStats.totalObjects} Objects");
 		}
 
 		private ObjectVarsStats FixObjVarPictures(
@@ -109,7 +112,6 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			foreach (var key in dependantObjects)
 			{
 				stats.totalObjects++;
-
 				var obj = KBObject.Get(model, key);
 				var varsPart = obj.Parts[PartType.Variables] as VariablesPart;
 				if (varsPart == null)
@@ -118,6 +120,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 					continue;
 				}
 
+				bool relevantObject = false;
 				bool fixedObject = false;
 				foreach (Variable var in varsPart.Variables)
 				{
@@ -129,6 +132,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 						(var.DomainBasedOn != null && domains.ContainsKey(var.DomainBasedOn.Id))
 					)
 					{
+						relevantObject = true;
 						stats.totalVars++;
 
 						if (var.IsPropertyDefault(ATT.Picture))
@@ -144,6 +148,10 @@ namespace GeneXus.Packages.SupportTools.Fixing
 						output.AddLine($"Set default picture for: {obj.TypeDescriptor.Name}, {obj.Name}, &{var.Name}, {oldPicture}, {newPicture}");
 					}
 				}
+
+				if (relevantObject)
+					stats.relevantObjects++;
+
 				if (fixedObject)
 				{
 					obj.Save();
@@ -221,7 +229,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				stats.fixes++;
 
 				string newPicture = att.GetPropertyValueString(ATT.Picture);
-				output.AddLine($"Set default picture for: Attribute, '{att.Name}', '{oldPicture}', '{newPicture}'");
+				output.AddLine($"Set default picture for: {att.TypeDescriptor.Name}, '{att.Name}', '{oldPicture}', '{newPicture}'");
 			}
 
 			return stats;
