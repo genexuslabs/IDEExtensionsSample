@@ -1,17 +1,8 @@
-using Artech.Architecture.Common.Deployment;
 using Artech.Architecture.Common.Objects;
 using Artech.Architecture.Common.Services;
-using Artech.Common.Collections;
 using Artech.Genexus.Common;
 using Artech.Genexus.Common.Objects;
-using Artech.Genexus.Common.Parts.Layout;
 using Artech.Genexus.Common.Parts.SDT;
-using Artech.Udm.Framework;
-using Artech.Udm.Framework.References;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Attribute = Artech.Genexus.Common.Objects.Attribute;
 
 namespace GeneXus.Packages.SupportTools.Fixing
 {
@@ -23,10 +14,10 @@ namespace GeneXus.Packages.SupportTools.Fixing
 		public static bool ExecuteTool(KBModel model)
 		{
 			var instance = new ImpactSDTsN7toN8();
-			return instance.CheckImpact(model);
+			return instance.CheckImpact(model, 7) && instance.CheckImpact(model, 4);
 		}
 
-		protected bool CheckImpact(KBModel model)
+		protected bool CheckImpact(KBModel model, int length)
 		{
 			IOutputService output = CommonServices.Output;
 
@@ -36,7 +27,7 @@ namespace GeneXus.Packages.SupportTools.Fixing
 			foreach (var sdt in SDT.GetAll(model))
 			{
 				total++;
-				int sdtProblems = CheckImpact(sdt);
+				int sdtProblems = CheckImpact(sdt, length);
 				if (sdtProblems > 0)
 				{
 					problems += sdtProblems;
@@ -44,12 +35,13 @@ namespace GeneXus.Packages.SupportTools.Fixing
 				}
 			}
 
-			output.AddLine($"Found {problems} problems impacting {impactCount} SDTs from a total {total}");
+			output.AddLine($"Length {length}: Found {problems} problems impacting {impactCount} SDTs from a total {total}");
 			return true;
 		}
 
-		private int CheckImpact(SDT sdt)
+		private int CheckImpact(SDT sdt, int length)
 		{
+			int impactCount = 0;
 			IOutputService output = CommonServices.Output;
 			foreach (var item in sdt.SDTStructure.Root.GetAllItems<SDTItem>())
 			{
@@ -61,14 +53,15 @@ namespace GeneXus.Packages.SupportTools.Fixing
 						item.Type == eDBType.LONGVARCHAR ||
 						item.Type == eDBType.NUMERIC
 					) &&
-					item.Length == 7 &&
+					item.Length == length &&
 					item.Decimals == 0
 				)
 				{
-					output.AddLine($"{item.Name} in {sdt.Name} is {item.Type.ToString()}(7.0)");
+					impactCount++;
+					output.AddLine($"{item.Name} in {sdt.Name} is {item.Type}({length}.0)");
 				}
 			}
-			return 0;
+			return impactCount;
 		}
 	}
 }
