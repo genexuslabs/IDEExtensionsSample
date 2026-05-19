@@ -1,67 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="GeneXus.Package.UI.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <LangVersion>latest</LangVersion>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Artech.Architecture.Common">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Architecture.UI.Framework">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Architecture.UI.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Common">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Common.Framework">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Common.Helpers">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Helpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Common.Properties">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Common.Properties.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Genexus.Common">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Genexus.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Artech.Udm.Framework">
-      <HintPath>$(GX_SDK_DIR)\Bin\Artech.Udm.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="$(GX_SDK_DIR)\Src\CommonPackageInfo.cs" Link="Properties\CommonPackageInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="SupportTools.package" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

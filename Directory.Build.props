@@ -1,0 +1,11 @@
+<Project>
+
+	<!-- GeneXus SDKs properties -->
+  <PropertyGroup>
+    <GeneXusSdkTargetFrameworks>net471</GeneXusSdkTargetFrameworks>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)\Packages\$(Configuration)</PackageOutputPath>
+    <GeneXusPackageCompatibilityNumber>143920</GeneXusPackageCompatibilityNumber> <!-- This value must match the value defined in CommonPackageInfo.cs -->
+    <GeneXusPatternCompatibilityNumber>79836</GeneXusPatternCompatibilityNumber> <!-- This value must match the value defined in CommonPatternInfo.cs -->
+  </PropertyGroup>
+
+</Project>

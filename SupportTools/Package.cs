@@ -1,7 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
+using Artech.Architecture.Common.Packages;
 using Artech.Architecture.Common.Services;
 using Artech.Architecture.UI.Framework.Packages;
+
+[assembly: Package(typeof(GeneXus.Packages.SupportTools.Package))]
 
 namespace GeneXus.Packages.SupportTools
 {

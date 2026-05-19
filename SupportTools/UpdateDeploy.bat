@@ -2,6 +2,11 @@
 
 setlocal
 
+if "%GX_PROGRAM_DIR%" == "" (
+    cmd /c echo [91mGX_PROGRAM_DIR is not set. Point it at your GeneXus install directory and try again.[0m
+    exit /b 1
+)
+
 set Configuration=%1
 if %1. == . set Configuration=Debug
 
