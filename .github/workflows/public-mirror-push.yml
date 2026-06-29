@@ -25,12 +25,12 @@ jobs:
 
   sync:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-sync-reusable.yml@main
+    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-sync-reusable.yml@v1
     secrets: inherit
 
   ingest:
     if: ${{ github.event_name == 'repository_dispatch' }}
-    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-ingest-pr-reusable.yml@main
+    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-ingest-pr-reusable.yml@v1
     with:
       public_pr_number: ${{ github.event.client_payload.public_pr_number }}
       base_ref:         ${{ github.event.client_payload.base_ref }}
@@ -43,7 +43,7 @@ jobs:
   close-mirror:
     if: ${{ github.event_name == 'pull_request' &&
             contains(toJSON(github.event.pull_request.labels.*.name), 'mirror:pub-') }}
-    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-close-pr-reusable.yml@main
+    uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-close-pr-reusable.yml@v1
     with:
       labels_json: ${{ toJSON(github.event.pull_request.labels) }}
       base_ref:    ${{ github.event.pull_request.base.ref }}
