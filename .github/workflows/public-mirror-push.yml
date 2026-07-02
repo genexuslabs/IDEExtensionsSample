@@ -5,6 +5,12 @@
 # ------------------------------------------------------------------------------
 name: Public mirror — push
 
+run-name: >-
+  ${{ github.event_name == 'push' && format('Public Mirror Sync - {0}', github.event.head_commit.message) ||
+      github.event_name == 'workflow_dispatch' && format('Public Mirror Sync - {0}', github.ref_name) ||
+      github.event_name == 'repository_dispatch' && format('Public Mirror Ingest PR {0}', github.event.client_payload.public_pr_number) ||
+      format('Public Mirror Close PR {0}', github.event.pull_request.number) }}
+
 on:
   push:
     branches:
@@ -41,7 +47,7 @@ jobs:
     secrets: inherit
 
   close-mirror:
-    if: ${{ github.event_name == 'pull_request' &&
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' &&
             contains(toJSON(github.event.pull_request.labels.*.name), 'mirror:pub-') }}
     uses: VY-GEN032-KG/.github/.github/workflows/public-mirror-close-pr-reusable.yml@v1
     with:
